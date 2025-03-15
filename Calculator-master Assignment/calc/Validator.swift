@@ -12,7 +12,7 @@ struct Validator {
     }
     
     static func isValidOperator(_ str: String) -> Bool {
-        let validOperators = ["+", "-", "*", "/", "%"]
+        let validOperators = ["+", "-", "x", "/", "%"]
         return validOperators.contains(str)
     }
     

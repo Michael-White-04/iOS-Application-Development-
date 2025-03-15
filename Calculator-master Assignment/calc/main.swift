@@ -11,7 +11,10 @@ import Foundation
 var args = ProcessInfo.processInfo.arguments
 args.removeFirst() // remove the name of the program
 
+//var args = ["2147483607", "+", "102"]
+
 if !Validator.isValidExpression(args) || Validator.hasOutOfBoundsNumber(args) {
+    print("Invalid expression!")
     exit(1)
 }
 
