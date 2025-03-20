@@ -12,8 +12,7 @@ struct Validator {
     }
     
     static func isValidOperator(_ str: String) -> Bool {
-        let validOperators = ["+", "-", "x", "/", "%"]
-        return validOperators.contains(str)
+        return Operator(rawValue: str) != nil
     }
     
     static func isValidExpression(_ args: [String]) -> Bool {

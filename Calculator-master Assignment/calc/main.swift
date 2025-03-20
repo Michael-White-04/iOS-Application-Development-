@@ -13,15 +13,18 @@ args.removeFirst() // remove the name of the program
 
 //var args = ["2147483607", "+", "102"]
 
-if !Validator.isValidExpression(args) || Validator.hasOutOfBoundsNumber(args) {
-    print("Invalid expression!")
+do {
+    if !Validator.isValidExpression(args) || Validator.hasOutOfBoundsNumber(args) {
+        throw CalculatorError.invalidExpression
+    }
+    
+    let calculator = Calculator();
+    let result = try calculator.calculate(args)
+    print(result)
+} catch let error as CalculatorError {
+    print("Error:", error.localizedDescription)
+    exit(1)
+} catch {
+    print("Unexpected error:", error)
     exit(1)
 }
-
-// Initialize a Calculator object
-let calculator = Calculator();
-
-// Calculate the result
-let result = calculator.calculate(args: args)
-
-print(result)
