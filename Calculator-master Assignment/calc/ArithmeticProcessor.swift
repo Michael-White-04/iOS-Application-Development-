@@ -7,6 +7,8 @@
 //
 
 class ArithmeticProcessor {
+    
+    // performs specific operation on two integers
     func perform(op: Operator, no1: Int, no2: Int) throws -> Int {
         switch op {
             case Operator.add:
@@ -26,46 +28,41 @@ class ArithmeticProcessor {
         }
     }
     
-    func add(_ no1: Int, _ no2: Int) throws -> Int {
-        let result = no1 &+ no2 // check what the result is
-        
-        // if this condition is true, then the bounds have been reached and result has wrapped around
-        if (result < Int32.min) || (result > Int32.max) {
-            throw CalculatorError.overflow
-        }
-        return result    }
-    
-    func subtract(_ no1: Int, _ no2: Int) throws -> Int {
-        let result = no1 &- no2 // check what the result is
-        
-        // if this condition is true, then the bounds have been reached and result has wrapped around
-        if (result < Int32.min) || (result > Int32.max) {
+    private func checkOverflow(_ result: Int) throws -> Int {
+        if (result < Int.min) || (result > Int.max) {
             throw CalculatorError.overflow
         }
         return result
     }
     
-    func multiply(_ no1: Int, _ no2: Int) throws -> Int {
-        /*if no1 != 0 && no2 != 0 {
-            let result = no1 &* no2
-            if result / no1 != no2 {
-                print("Error: Integer overflow")
-                exit(1)
-            }
-            return result
-        }
-        return 0; */
-        no1 * no2 // overflow is automatically handled here by swift
+    // add two integers and check for overflow
+    private func add(_ no1: Int, _ no2: Int) throws -> Int {
+        let result = no1 &+ no2 // see what the result is
+        return try checkOverflow(result)
     }
     
-    func divide(_ no1: Int, _ no2: Int) throws -> Int {
+    // subtracts two integers while checking for overflow
+    private func subtract(_ no1: Int, _ no2: Int) throws -> Int {
+        let result = no1 &- no2 // see what the result is
+        return try checkOverflow(result)
+    }
+    
+    // multiplies two integers while checking for overflow
+    private func multiply(_ no1: Int, _ no2: Int) throws -> Int {
+        let result = no1 &* no2 // see what the result is
+        return try checkOverflow(result)
+    }
+    
+    // divides two integers and check for division by zero
+    private func divide(_ no1: Int, _ no2: Int) throws -> Int {
         if no2 == 0 {
             throw CalculatorError.divisionByZero
         }
         return no1 / no2;
     }
     
-    func modulus(_ no1: Int, _ no2: Int) throws -> Int {
+    // calculates the modulus of two integers and checks for modulus by zero
+    private func modulus(_ no1: Int, _ no2: Int) throws -> Int {
         if no2 == 0 {
             throw CalculatorError.modulusByZero
         }

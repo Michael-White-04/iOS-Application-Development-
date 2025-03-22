@@ -11,6 +11,7 @@ import Foundation
 class Calculator {
     let evaluator = ExpressionEvaluator()
     
+    // calculates result of given arithmetic expression
     func calculate(_ args: [String]) throws -> String {
         return try evaluator.evaluate(args: args)
     }

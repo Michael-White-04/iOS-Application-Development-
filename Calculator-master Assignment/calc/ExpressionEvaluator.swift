@@ -9,10 +9,12 @@
 class ExpressionEvaluator {
     let processor = ArithmeticProcessor()
     
+    // evaulates mathematical expression and handles operator precedence
     func evaluate(args: [String]) throws -> String {
         var numbers = [Int]()
         var operators = [Operator]()
         
+        // separate input by numbers and operators
         for arg in args {
             if let num = Int(arg) {
                 numbers.append(num)

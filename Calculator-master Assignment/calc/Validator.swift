@@ -7,14 +7,18 @@
 //
 
 struct Validator {
+    
+    // check if input can be converted to valid integer
     static func isValidInteger(_ str: String) -> Bool {
         return Int(str) != nil
     }
     
+    // check if string is an operator we accept
     static func isValidOperator(_ str: String) -> Bool {
         return Operator(rawValue: str) != nil
     }
     
+    // validate expression follows correct format
     static func isValidExpression(_ args: [String]) -> Bool {
         var expectNumber = true
         
@@ -34,6 +38,7 @@ struct Validator {
         return !expectNumber
     }
     
+    // check if expression contains any numbers outside the Int32 range
     static func hasOutOfBoundsNumber(_ args: [String]) -> Bool {
         for arg in args {
             if let num = Int(arg) {
