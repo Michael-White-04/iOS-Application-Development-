@@ -29,7 +29,7 @@ class ArithmeticProcessor {
     }
     
     private func checkOverflow(_ result: Int) throws -> Int {
-        if (result < Int.min) || (result > Int.max) {
+        if (result < Int32.min) || (result > Int32.max) {
             throw CalculatorError.overflow
         }
         return result
